@@ -48,25 +48,28 @@ public class PanDisp extends JPanel implements ActionListener {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (HitDetection.HitDetection(nX, nY, nX1, nY1, nPlayerLength, nPlatformHeight, nPlatformWidth)) {
-            nJump = 75;
-        }
-        if (nJump > 2) {
-            nJump -= 2;
-        }
-        nY += nGravity;
-        nY -= nJump;
-        nX += nDir;
+    public class FrameRate extends JPanel implements ActionListener {
 
-        super.repaint();
-    }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (HitDetection.HitDetection(nX, nY, nX1, nY1, nPlayerLength, nPlatformHeight, nPlatformWidth)) {
+                nJump = 75;
+            }
+            if (nJump > 2) {
+                nJump -= 2;
+            }
+            nY += nGravity;
+            nY -= nJump;
+            nX += nDir;
 
-    @Override
-    public void paintComponent(Graphics g) {
-        platform.draw((Graphics2D) g, nX1, nY1, nPlatformWidth, nPlatformHeight, nSHeight, nSWidth);
-        player.draw((Graphics2D) g, nX, nY);
+            super.repaint();
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            platform.draw((Graphics2D) g, nX1, nY1, nPlatformWidth, nPlatformHeight, nSHeight, nSWidth);
+            player.draw((Graphics2D) g, nX, nY);
+        }
     }
 
     public class KeyInput implements KeyListener {
