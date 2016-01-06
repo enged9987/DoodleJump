@@ -10,10 +10,10 @@ public class FraMain extends JFrame {
         Dimension dScreenSize;
         int nScHeight, nScWidth;
         dScreenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-//        nScHeight = (int) dScreenSize.getHeight();
-//        nScWidth = (int) dScreenSize.getWidth();
-        nScWidth = 500;
-        nScHeight = 500;
+        nScHeight = (int) dScreenSize.getHeight();
+        nScWidth = (int) dScreenSize.getWidth();
+        // nScWidth = 500;
+        // nScHeight = 500;
         PanMain panMain = new PanMain();
         setTitle("Doodle Jump");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//DO_NOTHING_ON_CLOSE
