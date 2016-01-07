@@ -1,6 +1,5 @@
 package Platform;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class PanDisp extends JPanel implements ActionListener {
 
@@ -57,17 +55,19 @@ public class PanDisp extends JPanel implements ActionListener {
                 moveIt(evt);
             }
         });
-        if (HitDetection.HitDetection(nX, nY, nX1, nY1, nPlayerLength, nPlatformHeight, nPlatformWidth)) {
+
+        nDirV += nGravity;
+        nDirV -= nJump;
+        nY += nDirV;
+        nX += nDirH;
+        if (nDirV > 0 && HitDetection.HitDetection(nX, nY, nX1, nY1, nPlayerLength, nPlatformHeight, nPlatformWidth)) {
             nJump = 75;
         }
         if (nJump > 2) {
             nJump -= 2;
         }
-        nY+= nGravity;
-        nY -= nJump;
-        //nY += nDirV;
-       
-
+        nDirH = 0;
+        nDirV = 0;
         super.repaint();
     }
 
@@ -80,13 +80,13 @@ public class PanDisp extends JPanel implements ActionListener {
     public void moveIt(KeyEvent evt) {
         switch (evt.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                nDirH = -1;
+                nDirH = -50;
                 break;
             case KeyEvent.VK_RIGHT:
-                nDirH = 1;
+                nDirH = 50;
                 break;
         }
-         nX += nDirH;
+
     }
 }
 //
