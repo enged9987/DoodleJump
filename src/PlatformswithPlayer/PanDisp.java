@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -16,7 +18,7 @@ public class PanDisp extends JPanel implements ActionListener {
     Dimension screenSize;
     int nHeight, nWidth;
     public int nX, nY, nX1, nY1, nPlayerLength;
-    int nWidthR = 35, nLengthR = 300, nGravity, nJump, nDir;
+    int nWidthR = 35, nLengthR = 300, nGravity, nJump, nDirV, nDirH;
     Timer timer;
 
     PanDisp() {
@@ -35,7 +37,8 @@ public class PanDisp extends JPanel implements ActionListener {
         nY1 = 800;
         nGravity = 25;
         nJump = 0;
-        nDir = 0;
+        nDirH = 0;
+        nDirV = 0;
         platform2.nY = (nHeight / 5) * 3;
         platform3.nY = (nHeight / 5) * 2;
         platform4.nY = (nHeight / 5);
@@ -50,11 +53,16 @@ public class PanDisp extends JPanel implements ActionListener {
         platform1.update();
         platform2.update();
         platform3.update();
-        platform4.update();
-        if (HitDetection.HitDetection(nX, nY, platform1.nX, platform1.nY, nPlayerLength, nLengthR, nWidthR)
-                || HitDetection.HitDetection(nX, nY, platform2.nX, platform2.nY, nPlayerLength, nLengthR, nWidthR)
-                || HitDetection.HitDetection(nX, nY, platform3.nX, platform3.nY, nPlayerLength, nLengthR, nWidthR)
-                || HitDetection.HitDetection(nX, nY, platform4.nX, platform4.nY, nPlayerLength, nLengthR, nWidthR)) {
+        platform4.update();addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent evt) {
+                moveIt(evt);
+            }
+        });
+        if (HitDetection.HitDetection(nX, nY, platform1.nX, platform1.nY, nPlayerLength, nWidthR, nLengthR)
+                || HitDetection.HitDetection(nX, nY, platform2.nX, platform2.nY, nPlayerLength, nWidthR, nLengthR)
+                || HitDetection.HitDetection(nX, nY, platform3.nX, platform3.nY, nPlayerLength, nWidthR, nLengthR)
+                || HitDetection.HitDetection(nX, nY, platform4.nX, platform4.nY, nPlayerLength, nWidthR, nLengthR)) {
 
             nJump = 75;
         }
@@ -63,7 +71,7 @@ public class PanDisp extends JPanel implements ActionListener {
         }
         nY += nGravity;
         nY -= nJump;
-        nX += nDir;
+        nX += nDirH;
 
         super.repaint();
 
@@ -82,5 +90,16 @@ public class PanDisp extends JPanel implements ActionListener {
         //player.draw((Graphics2D) g, nX, nY);
 
         //Get a rectangle to display with background color
+    }
+    public void moveIt(KeyEvent evt) {
+        switch (evt.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                nDirH = -5;
+                break;
+            case KeyEvent.VK_RIGHT:
+                nDirH = 5;
+                break;
+        }
+
     }
 }
