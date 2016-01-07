@@ -24,7 +24,7 @@ public class Platforms {
     }
 
     public void update() {
-        nY++;
+        nY+=2;
         if (nY == nHeight) {
             nX = (int) (Math.random() * (nWidth - nLengthR));
             nY = 0;

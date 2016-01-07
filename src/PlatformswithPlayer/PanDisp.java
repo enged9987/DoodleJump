@@ -35,7 +35,7 @@ public class PanDisp extends JPanel implements ActionListener {
         nY = 100;
         nX1 = 600;
         nY1 = 800;
-        nGravity = 25;
+        nGravity = 30;
         nJump = 0;
         nDirH = 0;
         nDirV = 0;
