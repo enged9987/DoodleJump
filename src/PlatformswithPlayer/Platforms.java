@@ -1,7 +1,5 @@
 package PlatformswithPlayer;
 
-import PlatformScratch.*;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 
@@ -24,7 +22,7 @@ public class Platforms {
     }
 
     public void update() {
-        nY+=2;
+        nY+=4;
         if (nY == nHeight) {
             nX = (int) (Math.random() * (nWidth - nLengthR));
             nY = 0;

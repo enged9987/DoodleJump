@@ -31,11 +31,11 @@ public class PanDisp extends JPanel implements ActionListener {
         platform4 = new Platforms(nHeight, nWidth);
         nPlayerLength = nHeight / 8;
         player = new Player(nPlayerLength);
-        nX = 650;
-        nY = 100;
+        nX = nWidth/2;
+        nY = nHeight/2;
         nX1 = 600;
         nY1 = 800;
-        nGravity = 30;
+        nGravity = 25;
         nJump = 0;
         nDirH = 0;
         nDirV = 0;
