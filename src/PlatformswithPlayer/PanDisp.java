@@ -12,9 +12,11 @@ import javax.swing.Timer;
 public class PanDisp extends JPanel implements ActionListener {
 
     Platforms platform1, platform2, platform3, platform4;
+    Player player;
     Dimension screenSize;
     int nHeight, nWidth;
-    int nWidthR = 35, nLengthR = 300;
+    public int nX, nY, nX1, nY1, nPlayerLength;
+    int nWidthR = 35, nLengthR = 300, nGravity, nJump, nDir;
     Timer timer;
 
     PanDisp() {
@@ -25,6 +27,15 @@ public class PanDisp extends JPanel implements ActionListener {
         platform2 = new Platforms(nHeight, nWidth);
         platform3 = new Platforms(nHeight, nWidth);
         platform4 = new Platforms(nHeight, nWidth);
+        nPlayerLength = nHeight / 8;
+        player = new Player(nPlayerLength);
+        nX = 650;
+        nY = 100;
+        nX1 = 600;
+        nY1 = 800;
+        nGravity = 25;
+        nJump = 0;
+        nDir = 0;
         platform2.nY = (nHeight / 5) * 3;
         platform3.nY = (nHeight / 5) * 2;
         platform4.nY = (nHeight / 5);
@@ -40,6 +51,20 @@ public class PanDisp extends JPanel implements ActionListener {
         platform2.update();
         platform3.update();
         platform4.update();
+        if (HitDetection.HitDetection(nX, nY, platform1.nX, platform1.nY, nPlayerLength, nLengthR, nWidthR)
+                || HitDetection.HitDetection(nX, nY, platform2.nX, platform2.nY, nPlayerLength, nLengthR, nWidthR)
+                || HitDetection.HitDetection(nX, nY, platform3.nX, platform3.nY, nPlayerLength, nLengthR, nWidthR)
+                || HitDetection.HitDetection(nX, nY, platform4.nX, platform4.nY, nPlayerLength, nLengthR, nWidthR)) {
+
+            nJump = 75;
+        }
+        if (nJump > 2) {
+            nJump -= 2;
+        }
+        nY += nGravity;
+        nY -= nJump;
+        nX += nDir;
+
         super.repaint();
 
     }
@@ -49,10 +74,13 @@ public class PanDisp extends JPanel implements ActionListener {
         g.setColor(Color.blue);
         g.fillRect(0, 0, nWidth, nHeight);
         g.setColor(Color.DARK_GRAY);
+        player.draw((Graphics2D) g, nX, nY, nHeight);
         platform1.draw((Graphics2D) g);
         platform2.draw((Graphics2D) g);
         platform3.draw((Graphics2D) g);
         platform4.draw((Graphics2D) g);
+        //player.draw((Graphics2D) g, nX, nY);
+
         //Get a rectangle to display with background color
     }
 }
